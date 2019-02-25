@@ -5,15 +5,16 @@ import java.io.InputStreamReader;
 public class Assignment3 {
     public static void main(String [] args) {
         BufferedReader keyboardReader = new BufferedReader(new InputStreamReader(System.in));
-        String input = new String();
+        String input = null;
         try {
-            System.out.print("Enter the G-Language word to cheack:");
+            System.out.print("Enter the G-Language word to check:");
             input = keyboardReader.readLine();
         }catch (IOException e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         LanguageRecognizerG w1 = new LanguageRecognizerG(input);
         w1.recursivePrintG();
+        /*
         try {
             System.out.print("Enter the infix expression to evaluate:");
             input = keyboardReader.readLine();
@@ -22,6 +23,7 @@ public class Assignment3 {
         }
         InfixCalculator w2 = new InfixCalculator(input);
         InfixCalculator.evaluateInfix;
+        */
     }
 
 }
