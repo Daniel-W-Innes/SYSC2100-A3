@@ -3,14 +3,13 @@ import java.util.LinkedList;
 class StackListBased<E> {
     private LinkedList<E> items;
 
-    StackListBased(){
+    StackListBased() {
         items = new LinkedList<>();
     }
 
     void createStack() {
         items = new LinkedList<>();
     }
-
 
     void popAll() {
         items.clear();
@@ -21,7 +20,7 @@ class StackListBased<E> {
     }
 
     void push(E obj) {
-        items.add(0,obj);
+        items.add(0, obj);
     }
 
     E pop() {

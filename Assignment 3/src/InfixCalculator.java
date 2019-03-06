@@ -9,7 +9,7 @@ class InfixCalculator {
         stack = new StackListBased<>();
     }
 
-    private static int runOperator(String op, int num1, int num2) {
+    private static int runOperator(String op, int num2, int num1) {
         switch (op) {
             case "+":
                 return num1 + num2;
@@ -25,35 +25,36 @@ class InfixCalculator {
     }
 
     private String infixToPostfix(String infix) {
-        Map<String, Integer> precedence = Map.of("+", 1,"-",1,"*",2,"/",2);
-        StringBuilder Postfix = new StringBuilder();
+        Map<String, Integer> precedence = Map.of("+", 1, "-", 1, "*", 2, "/", 2);
+        StringBuilder postFix = new StringBuilder();
         StackListBased<String> operatorStack = new StackListBased<>();
-        String[] strs = infix.replaceAll("\\s+" , "").split("(?=[-+*/()])|(?<=[-+*/()])");
+        String[] strs = infix.replaceAll("\\s+", "").split("(?=[-+*/()])|(?<=[-+*/()])");
         for (String str : strs) {
             if (str.matches("\\d+")) {
-                Postfix.append(str);
-                Postfix.append(" ");
+                postFix.append(str);
+                postFix.append(" ");
             } else if (str.equals("(")) {
                 operatorStack.push(str);
             } else if (str.equals(")")) {
                 while (!operatorStack.peek().equals("(")) {
-                    Postfix.append(operatorStack.pop());
-                    Postfix.append(" ");
+                    postFix.append(operatorStack.pop());
+                    postFix.append(" ");
                 }
                 operatorStack.pop();
             } else if (str.matches("[-+*/]")) {
                 while (!operatorStack.isEmpty() && !operatorStack.peek().equals("(") && (precedence.get(str) <= precedence.get(operatorStack.peek()))) {
-                    Postfix.append(operatorStack.pop());
-                    Postfix.append(" ");
+                    postFix.append(operatorStack.pop());
+                    postFix.append(" ");
                 }
                 operatorStack.push(str);
             }
         }
         while (!operatorStack.isEmpty()) {
-            Postfix.append(operatorStack.pop());
-            Postfix.append(" ");
+            postFix.append(operatorStack.pop());
+            postFix.append(" ");
         }
-        return Postfix.toString();
+        postFix.deleteCharAt(postFix.lastIndexOf(" "));
+        return postFix.toString();
     }
 
     private int getPostfix(String postFix) {
@@ -61,8 +62,7 @@ class InfixCalculator {
             if (str.matches("\\d+")) {
                 stack.push(Integer.parseInt(str));
             } else {
-                int num = stack.pop();
-                stack.push(runOperator(str, stack.pop(), num));
+                stack.push(runOperator(str, stack.pop(), stack.pop()));
             }
         }
         return stack.pop();
