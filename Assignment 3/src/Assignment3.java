@@ -14,16 +14,13 @@ public class Assignment3 {
         }
         LanguageRecognizerG w1 = new LanguageRecognizerG(input);
         w1.recursivePrintG();
-        /*
         try {
             System.out.print("Enter the infix expression to evaluate:");
             input = keyboardReader.readLine();
         }catch (IOException e){
-            System.out.println(e);
+            e.printStackTrace();
         }
         InfixCalculator w2 = new InfixCalculator(input);
-        InfixCalculator.evaluateInfix;
-        */
+        w2.evaluateInfix();
     }
-
 }
