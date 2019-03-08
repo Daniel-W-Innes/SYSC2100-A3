@@ -26,6 +26,7 @@ public class LanguageRecognizerGTest {
         w1.recursivePrintG();
         Assert.assertEquals("Recursion: Word “###” is NOT a word of the G language\r\n", outContent.toString());
     }
+
     @Test
     public void recursivePrintG2() {
         LanguageRecognizerG w1 = new LanguageRecognizerG("#A");
